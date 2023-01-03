@@ -7,7 +7,7 @@ public class ModCreativeModeTab {
     public static final CreativeModeTab COURSE_TAB = new CreativeModeTab("modtab") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(moditems.GOLIATH_TIGERFISH.get());
+            return new ItemStack(ModItems.GOLIATH_TIGERFISH.get());
         }
     };
 }
