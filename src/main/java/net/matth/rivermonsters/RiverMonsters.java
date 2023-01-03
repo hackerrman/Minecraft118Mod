@@ -1,6 +1,7 @@
 package net.matth.rivermonsters;
 
 import net.matth.rivermonsters.block.ModBlocks;
+import net.matth.rivermonsters.entity.client.GiantStingrayRenderer;
 import net.matth.rivermonsters.entity.client.GoliathTigerRenderer;
 import net.matth.rivermonsters.entity.ModEntityTypes;
 import net.matth.rivermonsters.item.ModItems;
@@ -39,6 +40,7 @@ public class RiverMonsters {
     }
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntityTypes.GOLIATH_TIGER.get(), GoliathTigerRenderer::new);
+        EntityRenderers.register(ModEntityTypes.GIANT_STINGRAY.get(), GiantStingrayRenderer::new);
     }
     private void setup(final FMLCommonSetupEvent event)
     {

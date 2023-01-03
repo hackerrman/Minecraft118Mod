@@ -7,21 +7,20 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -31,11 +30,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GoliathTigerEntity extends WaterAnimal implements IAnimatable {
+public class GiantStingrayEntity extends WaterAnimal implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
-    public GoliathTigerEntity(EntityType<? extends WaterAnimal> entityType, Level level) {
+
+    public GiantStingrayEntity(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new GoliathTigerEntity.FishMoveControl(this);
     }
 
     protected void registerGoals() {
@@ -46,14 +45,16 @@ public class GoliathTigerEntity extends WaterAnimal implements IAnimatable {
         //this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         //this.goalSelector.addGoal(4, new ;(this, 1.0D;));
         this.goalSelector.addGoal(0, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new GiantStingrayEntity.FishSwimGoal(this));
         this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.goalSelector.addGoal(4, new GoliathTigerEntity.FishSwimGoal(this));
-        this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 0.1D, false));
 
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));
-
+        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Squid.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractFish.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Player.class, true));
 
     }
+
     public static AttributeSupplier setAttributes() {
         return WaterAnimal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
@@ -82,21 +83,21 @@ public class GoliathTigerEntity extends WaterAnimal implements IAnimatable {
         return 0.2F;
     }
 
-    /* ANIMATIONS */
+    //* ANIMATIONS *//
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goliathtiger.swim", true));
+        if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.giantstingray.swim", true));
             return PlayState.CONTINUE;
         }
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goliathtiger.swim", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.giantstingray.swim", true));
         return PlayState.CONTINUE;
-        }
+    }
 
     private PlayState attackpredicate(AnimationEvent event) {
         if (this.swinging && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
             event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goliathtiger.hurt", false));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.giantstingray.attack", false));
             this.swinging = false;
         }
         return PlayState.CONTINUE;
@@ -113,28 +114,10 @@ public class GoliathTigerEntity extends WaterAnimal implements IAnimatable {
         return factory;
     }
 
-    protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel);
-    }
-
-    public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(0.01F, pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.8D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-        } else {
-            super.travel(pTravelVector);
-        }
-
-    }
-
     static class FishSwimGoal extends RandomSwimmingGoal {
-        private final GoliathTigerEntity fish;
+        private final GiantStingrayEntity fish;
 
-        public FishSwimGoal(GoliathTigerEntity p_27505_) {
+        public FishSwimGoal(GiantStingrayEntity p_27505_) {
             super(p_27505_, 1.0D, 40);
             this.fish = p_27505_;
         }
@@ -143,46 +126,40 @@ public class GoliathTigerEntity extends WaterAnimal implements IAnimatable {
          * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
          * method as well.
          */
-        public boolean canUse() {
-            return this.fish.canRandomSwim() && super.canUse();
-        }
-    }
 
-    private boolean canRandomSwim() { return true;
-    }
+        static class FishMoveControl extends MoveControl {
+            private final GiantStingrayEntity fish;
 
-    static class FishMoveControl extends MoveControl {
-        private final GoliathTigerEntity fish;
-
-        FishMoveControl(GoliathTigerEntity p_27501_) {
-            super(p_27501_);
-            this.fish = p_27501_;
-        }
-
-        public void tick() {
-            if (this.fish.isEyeInFluid(FluidTags.WATER)) {
-                this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
+            FishMoveControl(GiantStingrayEntity p_27501_) {
+                super(p_27501_);
+                this.fish = p_27501_;
             }
 
-            if (this.operation == MoveControl.Operation.MOVE_TO && !this.fish.getNavigation().isDone()) {
-                float f = (float)(this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                this.fish.setSpeed(Mth.lerp(0.125F, this.fish.getSpeed(), f));
-                double d0 = this.wantedX - this.fish.getX();
-                double d1 = this.wantedY - this.fish.getY();
-                double d2 = this.wantedZ - this.fish.getZ();
-                if (d1 != 0.0D) {
-                    double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-                    this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double)this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+            public void tick() {
+                if (this.fish.isEyeInFluid(FluidTags.WATER)) {
+                    this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
                 }
 
-                if (d0 != 0.0D || d2 != 0.0D) {
-                    float f1 = (float)(Mth.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
-                    this.fish.setYRot(this.rotlerp(this.fish.getYRot(), f1, 90.0F));
-                    this.fish.yBodyRot = this.fish.getYRot();
-                }
+                if (this.operation == MoveControl.Operation.MOVE_TO && !this.fish.getNavigation().isDone()) {
+                    float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                    this.fish.setSpeed(Mth.lerp(0.125F, this.fish.getSpeed(), f));
+                    double d0 = this.wantedX - this.fish.getX();
+                    double d1 = this.wantedY - this.fish.getY();
+                    double d2 = this.wantedZ - this.fish.getZ();
+                    if (d1 != 0.0D) {
+                        double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+                        this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+                    }
 
-            } else {
-                this.fish.setSpeed(0.0F);
+                    if (d0 != 0.0D || d2 != 0.0D) {
+                        float f1 = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
+                        this.fish.setYRot(this.rotlerp(this.fish.getYRot(), f1, 90.0F));
+                        this.fish.yBodyRot = this.fish.getYRot();
+                    }
+
+                } else {
+                    this.fish.setSpeed(0.0F);
+                }
             }
         }
     }

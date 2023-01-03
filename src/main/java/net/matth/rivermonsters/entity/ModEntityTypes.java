@@ -1,5 +1,6 @@
 package net.matth.rivermonsters.entity;
 
+import net.matth.rivermonsters.entity.custom.GiantStingrayEntity;
 import net.matth.rivermonsters.entity.custom.GoliathTigerEntity;
 import net.matth.rivermonsters.RiverMonsters;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +19,11 @@ public class ModEntityTypes {
             () -> EntityType.Builder.of(GoliathTigerEntity::new, MobCategory.WATER_CREATURE)
                     .sized(0.8f, 0.6f)
                     .build(new ResourceLocation(RiverMonsters.MOD_ID, "goliath_tiger").toString()));
+
+    public static final RegistryObject<EntityType<GiantStingrayEntity>> GIANT_STINGRAY = ENTITY_TYPES.register("giant_stingray",
+            () -> EntityType.Builder.of(GiantStingrayEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.8f, 0.6f)
+                    .build(new ResourceLocation(RiverMonsters.MOD_ID, "giant_stingray").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
