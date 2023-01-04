@@ -1,5 +1,7 @@
 package net.matth.rivermonsters.entity;
 
+import net.matth.rivermonsters.entity.custom.AlligatorGarEntity;
+import net.matth.rivermonsters.entity.custom.BowfinEntity;
 import net.matth.rivermonsters.entity.custom.GiantStingrayEntity;
 import net.matth.rivermonsters.entity.custom.GoliathTigerEntity;
 import net.matth.rivermonsters.RiverMonsters;
@@ -24,6 +26,15 @@ public class ModEntityTypes {
             () -> EntityType.Builder.of(GiantStingrayEntity::new, MobCategory.WATER_CREATURE)
                     .sized(0.8f, 0.6f)
                     .build(new ResourceLocation(RiverMonsters.MOD_ID, "giant_stingray").toString()));
+
+    public static final RegistryObject<EntityType<BowfinEntity>> BOWFIN = ENTITY_TYPES.register("bowfin",
+            () -> EntityType.Builder.of(BowfinEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.8f, 0.6f)
+                    .build(new ResourceLocation(RiverMonsters.MOD_ID, "bowfin").toString()));
+    public static final RegistryObject<EntityType<AlligatorGarEntity>> ALLIGATOR_GAR = ENTITY_TYPES.register("alligator_gar",
+            () -> EntityType.Builder.of(AlligatorGarEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.8f, 0.6f)
+                    .build(new ResourceLocation(RiverMonsters.MOD_ID, "alligator_gar").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

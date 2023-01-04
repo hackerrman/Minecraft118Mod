@@ -1,6 +1,8 @@
 package net.matth.rivermonsters;
 
 import net.matth.rivermonsters.block.ModBlocks;
+import net.matth.rivermonsters.entity.client.AlligatorGarRenderer;
+import net.matth.rivermonsters.entity.client.BowfinRenderer;
 import net.matth.rivermonsters.entity.client.GiantStingrayRenderer;
 import net.matth.rivermonsters.entity.client.GoliathTigerRenderer;
 import net.matth.rivermonsters.entity.ModEntityTypes;
@@ -41,6 +43,8 @@ public class RiverMonsters {
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntityTypes.GOLIATH_TIGER.get(), GoliathTigerRenderer::new);
         EntityRenderers.register(ModEntityTypes.GIANT_STINGRAY.get(), GiantStingrayRenderer::new);
+        EntityRenderers.register(ModEntityTypes.BOWFIN.get(), BowfinRenderer::new);
+        EntityRenderers.register(ModEntityTypes.ALLIGATOR_GAR.get(), AlligatorGarRenderer::new);
     }
     private void setup(final FMLCommonSetupEvent event)
     {

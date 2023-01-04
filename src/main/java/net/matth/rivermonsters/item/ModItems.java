@@ -24,6 +24,14 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.GIANT_STINGRAY,0x614927, 0x917143,
                     new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
+    public static final RegistryObject<ForgeSpawnEggItem> BOWFIN_SPAWN_EGG = ITEMS.register("bowfin_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.BOWFIN,0x614927, 0x917143,
+                    new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
+
+    public static final RegistryObject<ForgeSpawnEggItem> ALLIGATOR_GAR_SPAWN_EGG = ITEMS.register("alligator_gar_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.ALLIGATOR_GAR,0x614927, 0x917143,
+                    new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
+
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
     public static void register(IEventBus eventBus) {
