@@ -7,8 +7,8 @@
 				"texture_width": 256,
 				"texture_height": 256,
 				"visible_bounds_width": 12,
-				"visible_bounds_height": 3.5,
-				"visible_bounds_offset": [0, 1.25, 0]
+				"visible_bounds_height": 9.5,
+				"visible_bounds_offset": [0, 4.25, 0]
 			},
 			"bones": [
 				{
@@ -21,7 +21,7 @@
 				},
 				{
 					"name": "bothead",
-					"pivot": [0, 7, -34],
+					"pivot": [0, 8, -32],
 					"cubes": [
 						{"origin": [-9, 3, -44], "size": [19, 5, 10], "uv": [128, 127]}
 					]
@@ -35,7 +35,7 @@
 				},
 				{
 					"name": "tail1",
-					"pivot": [0, 14, 17],
+					"pivot": [0, 12, 17],
 					"cubes": [
 						{"origin": [-11, 4, 16], "size": [23, 18, 19], "uv": [43, 75]},
 						{"origin": [0, 17, 20], "size": [1, 10, 9], "uv": [22, 30]},
@@ -53,7 +53,7 @@
 				},
 				{
 					"name": "tail3",
-					"pivot": [0, 10, 54],
+					"pivot": [0, 13, 57],
 					"cubes": [
 						{"origin": [0, 42, 25], "size": [1, 12, 18], "pivot": [0, 0, 0], "rotation": [-45, 0, 0], "uv": [0, 0]}
 					]
@@ -67,14 +67,14 @@
 				},
 				{
 					"name": "rightfin",
-					"pivot": [14, 5, -18],
+					"pivot": [14, 5, -20],
 					"cubes": [
 						{"origin": [14, 3, -28], "size": [23, 2, 16], "uv": [64, 123]}
 					]
 				},
 				{
 					"name": "toptail",
-					"pivot": [1, 15, 54],
+					"pivot": [1, 15, 56],
 					"cubes": [
 						{"origin": [0, 17, 75], "size": [1, 12, 10], "pivot": [0, 0, 0], "rotation": [2.5, 0, 0], "uv": [0, 75]},
 						{"origin": [-1, -27, 51], "size": [3, 12, 37], "pivot": [0, 0, 0], "rotation": [35, 0, 0], "uv": [0, 75]}

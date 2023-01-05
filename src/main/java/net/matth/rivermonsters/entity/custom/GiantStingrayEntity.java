@@ -44,8 +44,8 @@ public class GiantStingrayEntity extends WaterAnimal implements IAnimatable {
         // this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         //this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         //this.goalSelector.addGoal(4, new ;(this, 1.0D;));
-        this.goalSelector.addGoal(0, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(4, new GiantStingrayEntity.FishSwimGoal(this));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new GiantStingrayEntity.FishSwimGoal(this));
         this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setAlertOthers());
         this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 0.1D, false));
 

@@ -98,7 +98,7 @@ public class GreenlandSharkEntity extends WaterAnimal implements IAnimatable {
     private PlayState attackpredicate(AnimationEvent event) {
         if (this.swinging && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
             event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.greenlandshark.hurt", false));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.greenlandshark.attack", false));
             this.swinging = false;
         }
         return PlayState.CONTINUE;
