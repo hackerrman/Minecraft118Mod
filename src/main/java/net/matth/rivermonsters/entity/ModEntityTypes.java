@@ -1,9 +1,6 @@
 package net.matth.rivermonsters.entity;
 
-import net.matth.rivermonsters.entity.custom.AlligatorGarEntity;
-import net.matth.rivermonsters.entity.custom.BowfinEntity;
-import net.matth.rivermonsters.entity.custom.GiantStingrayEntity;
-import net.matth.rivermonsters.entity.custom.GoliathTigerEntity;
+import net.matth.rivermonsters.entity.custom.*;
 import net.matth.rivermonsters.RiverMonsters;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -35,6 +32,11 @@ public class ModEntityTypes {
             () -> EntityType.Builder.of(AlligatorGarEntity::new, MobCategory.WATER_CREATURE)
                     .sized(0.8f, 0.6f)
                     .build(new ResourceLocation(RiverMonsters.MOD_ID, "alligator_gar").toString()));
+
+    public static final RegistryObject<EntityType<GreenlandSharkEntity>> GREENLAND_SHARK = ENTITY_TYPES.register("greenland_shark",
+            () -> EntityType.Builder.of(GreenlandSharkEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.8f, 0.6f)
+                    .build(new ResourceLocation(RiverMonsters.MOD_ID, "greenland_shark").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

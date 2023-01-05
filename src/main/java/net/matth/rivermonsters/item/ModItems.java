@@ -25,11 +25,15 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
     public static final RegistryObject<ForgeSpawnEggItem> BOWFIN_SPAWN_EGG = ITEMS.register("bowfin_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.BOWFIN,0x614927, 0x917143,
+            () -> new ForgeSpawnEggItem(ModEntityTypes.BOWFIN,0x593b1d, 0x22c743,
                     new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
     public static final RegistryObject<ForgeSpawnEggItem> ALLIGATOR_GAR_SPAWN_EGG = ITEMS.register("alligator_gar_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.ALLIGATOR_GAR,0x614927, 0x917143,
+            () -> new ForgeSpawnEggItem(ModEntityTypes.ALLIGATOR_GAR,0xddedde, 0x7a9e7e,
+                    new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
+
+    public static final RegistryObject<ForgeSpawnEggItem> GREENLAND_SHARK_SPAWN_EGG = ITEMS.register("greenland_shark_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.GREENLAND_SHARK,0xddedde, 0x7a9e7e,
                     new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));

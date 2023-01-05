@@ -1,10 +1,7 @@
 package net.matth.rivermonsters;
 
 import net.matth.rivermonsters.block.ModBlocks;
-import net.matth.rivermonsters.entity.client.AlligatorGarRenderer;
-import net.matth.rivermonsters.entity.client.BowfinRenderer;
-import net.matth.rivermonsters.entity.client.GiantStingrayRenderer;
-import net.matth.rivermonsters.entity.client.GoliathTigerRenderer;
+import net.matth.rivermonsters.entity.client.*;
 import net.matth.rivermonsters.entity.ModEntityTypes;
 import net.matth.rivermonsters.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -45,6 +42,7 @@ public class RiverMonsters {
         EntityRenderers.register(ModEntityTypes.GIANT_STINGRAY.get(), GiantStingrayRenderer::new);
         EntityRenderers.register(ModEntityTypes.BOWFIN.get(), BowfinRenderer::new);
         EntityRenderers.register(ModEntityTypes.ALLIGATOR_GAR.get(), AlligatorGarRenderer::new);
+        EntityRenderers.register(ModEntityTypes.GREENLAND_SHARK.get(), GreenlandSharkRenderer::new);
     }
     private void setup(final FMLCommonSetupEvent event)
     {
