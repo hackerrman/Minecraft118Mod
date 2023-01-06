@@ -7,6 +7,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -33,8 +35,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class GiantStingrayEntity extends WaterAnimal implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
 
-    public GiantStingrayEntity(EntityType<? extends WaterAnimal> entityType, Level level) {
-        super(entityType, level);
+    public GiantStingrayEntity(EntityType<? extends WaterAnimal> entityType, Level level) {super(entityType, level);
+        this.moveControl = new FishSwimGoal.FishMoveControl(this);
     }
 
     protected void registerGoals() {
@@ -60,7 +62,7 @@ public class GiantStingrayEntity extends WaterAnimal implements IAnimatable {
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 8.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 2f).build();
+                .add(Attributes.MOVEMENT_SPEED, 1.5f).build();
     }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
@@ -112,6 +114,20 @@ public class GiantStingrayEntity extends WaterAnimal implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    public void travel(Vec3 pTravelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(0.01F, pTravelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.8D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(pTravelVector);
+        }
+
     }
 
     static class FishSwimGoal extends RandomSwimmingGoal {

@@ -30,12 +30,12 @@ public class ModEntityTypes {
                     .build(new ResourceLocation(RiverMonsters.MOD_ID, "bowfin").toString()));
     public static final RegistryObject<EntityType<AlligatorGarEntity>> ALLIGATOR_GAR = ENTITY_TYPES.register("alligator_gar",
             () -> EntityType.Builder.of(AlligatorGarEntity::new, MobCategory.WATER_CREATURE)
-                    .sized(0.8f, 0.6f)
+                    .sized(1.1f, 0.6f)
                     .build(new ResourceLocation(RiverMonsters.MOD_ID, "alligator_gar").toString()));
 
     public static final RegistryObject<EntityType<GreenlandSharkEntity>> GREENLAND_SHARK = ENTITY_TYPES.register("greenland_shark",
             () -> EntityType.Builder.of(GreenlandSharkEntity::new, MobCategory.WATER_CREATURE)
-                    .sized(0.8f, 0.6f)
+                    .sized(1.8f, 1.4f)
                     .build(new ResourceLocation(RiverMonsters.MOD_ID, "greenland_shark").toString()));
 
     public static void register(IEventBus eventBus) {

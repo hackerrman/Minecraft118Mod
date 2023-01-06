@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.animal.PolarBear;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -51,8 +52,9 @@ public class GreenlandSharkEntity extends WaterAnimal implements IAnimatable {
         this.goalSelector.addGoal(4, new GreenlandSharkEntity.FishSwimGoal(this));
         this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2D, false));
 
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Chicken.class, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PolarBear.class, false));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Chicken.class, false));
 
 
     }

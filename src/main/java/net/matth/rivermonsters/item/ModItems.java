@@ -33,7 +33,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
     public static final RegistryObject<ForgeSpawnEggItem> GREENLAND_SHARK_SPAWN_EGG = ITEMS.register("greenland_shark_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.GREENLAND_SHARK,0xddedde, 0x7a9e7e,
+            () -> new ForgeSpawnEggItem(ModEntityTypes.GREENLAND_SHARK,0x494d46, 0x6e7575,
                     new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
 
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(ModCreativeModeTab.COURSE_TAB)));
